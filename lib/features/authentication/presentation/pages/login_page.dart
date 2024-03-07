@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:user_app/features/authentication/presentation/widgets/login_button_widget.dart';
 import 'package:user_app/features/authentication/presentation/widgets/textfield_widget.dart';
 
 class LogInPage extends StatelessWidget {
@@ -14,10 +15,18 @@ class LogInPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextfieldWidget(
-                labeltext: 'Phone number',
-                icondata: Icon(Icons.phone),
-                controller: TextEditingController(),
-                keyboardtype: TextInputType.number),
+              hintText: 'Phone number',
+              icondata: const Icon(Icons.phone),
+              controller: TextEditingController(),
+              keyboardtype: TextInputType.number,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            LoginButtonWidget(
+              btntxt: 'Send OTP',
+              onPressed: () {},
+            )
           ],
         ),
       ),

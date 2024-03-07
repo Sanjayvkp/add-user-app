@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TextfieldWidget extends ConsumerWidget {
-  final String labeltext;
+  final String hintText;
   final Icon icondata;
   final TextEditingController controller;
   final TextInputType keyboardtype;
   const TextfieldWidget(
       {super.key,
-      required this.labeltext,
+      required this.hintText,
       required this.icondata,
       required this.controller,
       required this.keyboardtype});
@@ -22,12 +22,12 @@ class TextfieldWidget extends ConsumerWidget {
         controller: controller,
         cursorColor: Colors.black,
         decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-            hintText: labeltext,
+            contentPadding: const EdgeInsets.symmetric(vertical: 24),
+            hintText: hintText,
             prefixIcon: icondata,
-            labelStyle: const TextStyle(color: Colors.black),
-            fillColor: Colors.white,
+            iconColor: Colors.black,
+            hintStyle: const TextStyle(color: Colors.black),
+            fillColor: Colors.grey,
             filled: true,
             border: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.black),
