@@ -1,4 +1,4 @@
-import 'package:user_app/exceptions/base_exception.dart';
+import 'package:user_app/core/exceptions/base_exception.dart';
 
 final class InvalidCredentialsException extends BaseException {
   String? errorMsg;

@@ -1,5 +1,5 @@
-import 'package:user_app/exceptions/authentication/invalid_credential_exception.dart';
-import 'package:user_app/exceptions/base_exception.dart';
+import 'package:user_app/core/exceptions/authentication/invalid_credential_exception.dart';
+import 'package:user_app/core/exceptions/base_exception.dart';
 import 'package:user_app/features/authentication/domain/repository/auth_repository.dart';
 
 final class LogInWithPhoneUseCase {

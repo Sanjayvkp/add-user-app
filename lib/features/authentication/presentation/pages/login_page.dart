@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:user_app/features/authentication/presentation/pages/otp_verification_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:user_app/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:user_app/features/authentication/presentation/widgets/login_button_widget.dart';
 import 'package:user_app/features/authentication/presentation/widgets/textfield_widget.dart';
 
-class LogInPage extends StatelessWidget {
+class LogInPage extends ConsumerWidget {
   const LogInPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -35,7 +36,9 @@ class LogInPage extends StatelessWidget {
               TextfieldWidget(
                 hintText: 'Phone number',
                 icondata: const Icon(Icons.phone),
-                controller: TextEditingController(),
+                controller: ref
+                    .read(authenticationProvider.notifier)
+                    .phonenumberlogincontroller,
                 keyboardtype: TextInputType.number,
               ),
               const SizedBox(
@@ -44,11 +47,12 @@ class LogInPage extends StatelessWidget {
               LoginButtonWidget(
                 btntxt: 'Send OTP',
                 onPressed: () {
-                  Navigator.push(
+                  ref.read(authenticationProvider.notifier).signInWithPhone(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const OtpVerificationPage(),
-                      ));
+                      ref
+                          .read(authenticationProvider.notifier)
+                          .phonenumberlogincontroller
+                          .text);
                 },
               )
             ],

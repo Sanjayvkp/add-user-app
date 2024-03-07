@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:user_app/exceptions/base_exception.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:user_app/core/exceptions/base_exception.dart';
 import 'package:user_app/features/authentication/data/datasources/firebase_datasource.dart';
+
+part 'firebase_datasource_impl.g.dart';
 
 class FireBaseAuthenticationImpl implements FireBaseAuthentication {
   final FirebaseAuth _auth;
@@ -41,4 +44,9 @@ class FireBaseAuthenticationImpl implements FireBaseAuthentication {
       );
     }
   }
+}
+
+@riverpod
+FireBaseAuthentication firebaseAuthentication(FirebaseAuthenticationRef ref) {
+  return FireBaseAuthenticationImpl(FirebaseAuth.instance);
 }
