@@ -12,6 +12,16 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   Future<(String, int?)> loginWithPhone(String phone) async {
     return await datasource.loginWithPhone(phone);
   }
+
+  @override
+  Future<void> verifyOtp(String verificationId, String otp) async {
+    await datasource.verifyOtp(verificationId, otp);
+  }
+
+  @override
+  Future<void> signOut() async {
+    await datasource.signout();
+  }
 }
 
 @riverpod

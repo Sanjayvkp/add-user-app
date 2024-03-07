@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:user_app/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:user_app/features/authentication/presentation/widgets/login_button_widget.dart';
 import 'package:user_app/features/authentication/presentation/widgets/textfield_widget.dart';
 
-class OtpVerificationPage extends StatelessWidget {
+class OtpVerificationPage extends ConsumerWidget {
   const OtpVerificationPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -30,16 +32,25 @@ class OtpVerificationPage extends StatelessWidget {
                     height: 40,
                   ),
                   TextfieldWidget(
-                      keyboardtype: TextInputType.number,
-                      hintText: 'Enter Otp',
-                      icondata: const Icon(Icons.lock_clock_rounded),
-                      controller: TextEditingController()),
+                    keyboardtype: TextInputType.number,
+                    hintText: 'Enter Otp',
+                    icondata: const Icon(Icons.lock_clock_rounded),
+                    controller:
+                        ref.read(authenticationProvider.notifier).otpcontroller,
+                  ),
                   const SizedBox(
                     height: 32,
                   ),
                   LoginButtonWidget(
                     btntxt: 'Confirm Otp',
-                    onPressed: () {},
+                    onPressed: () {
+                      ref.read(authenticationProvider.notifier).verifyOtp(
+                          context,
+                          ref
+                              .read(authenticationProvider.notifier)
+                              .otpcontroller
+                              .text);
+                    },
                   ),
                   const SizedBox(
                     height: 40,

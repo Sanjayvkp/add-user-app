@@ -44,6 +44,18 @@ class FireBaseAuthenticationImpl implements FireBaseAuthentication {
       );
     }
   }
+
+  @override
+  Future<void> verifyOtp(String verificationId, String otp) async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId, smsCode: otp);
+    await _auth.signInWithCredential(credential);
+  }
+
+  @override
+  Future<void> signout() async {
+    await _auth.signOut();
+  }
 }
 
 @riverpod
