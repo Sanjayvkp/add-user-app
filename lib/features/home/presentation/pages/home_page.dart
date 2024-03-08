@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:user_app/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:user_app/features/home/presentation/providers/user_provider.dart';
+import 'package:user_app/features/home/presentation/widgets/alert_dialog_widget.dart';
 import 'package:user_app/features/home/presentation/widgets/show_dialog_widget.dart';
 import 'package:user_app/features/home/presentation/widgets/user_widget.dart';
 
@@ -23,26 +24,11 @@ class HomePage extends ConsumerWidget {
                 showDialog(
                   context: context,
                   builder: (context) {
-                    return AlertDialog(
-                      content: const Text(
-                        'Are you sure want to logout ?',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16),
-                        textAlign: TextAlign.center,
-                      ),
-                      actionsAlignment: MainAxisAlignment.center,
-                      actions: [
-                        TextButton(
-                            onPressed: () => ref
-                                .read(authenticationProvider.notifier)
-                                .signOut(context),
-                            child: const Text('Yes')),
-                        TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('No')),
-                      ],
+                    return AlertDialogWidget(
+                      title: 'Are you Sure want to logout?',
+                      onPressed: () => ref
+                          .read(authenticationProvider.notifier)
+                          .signOut(context),
                     );
                   },
                 );

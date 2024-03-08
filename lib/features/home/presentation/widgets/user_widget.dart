@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:user_app/features/home/domain/entities/user_entity.dart';
 import 'package:user_app/features/home/presentation/providers/user_provider.dart';
+import 'package:user_app/features/home/presentation/widgets/alert_dialog_widget.dart';
 
 class UserWidget extends ConsumerWidget {
   final List<UserEntity> entity;
@@ -34,9 +35,17 @@ class UserWidget extends ConsumerWidget {
               ),
               trailing: IconButton(
                   onPressed: () {
-                    ref
-                        .read(userProvider.notifier)
-                        .deleteUser(entity[index].id);
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialogWidget(
+                          title: 'Are you Sure want to delete this user?',
+                          onPressed: () => ref
+                              .read(userProvider.notifier)
+                              .deleteUser(entity[index].id),
+                        );
+                      },
+                    );
                   },
                   icon: const Icon(
                     Icons.delete,
@@ -49,3 +58,7 @@ class UserWidget extends ConsumerWidget {
     );
   }
 }
+
+  // ref
+  //                       .read(userProvider.notifier)
+  //                       .deleteUser(entity[index].id);
