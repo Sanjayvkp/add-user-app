@@ -1,26 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_provider.dart';
+part of 'user_firestore_datasource_impl.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authenticationHash() => r'6a7070195d5097c3b8de0cb0cf9f797034c2465b';
+String _$userFireStoreDataSourceHash() =>
+    r'4aa916a06b90f860f0dc8b2b06c0bba02ef42d13';
 
-/// See also [Authentication].
-@ProviderFor(Authentication)
-final authenticationProvider =
-    NotifierProvider<Authentication, AuthState>.internal(
-  Authentication.new,
-  name: r'authenticationProvider',
+/// See also [userFireStoreDataSource].
+@ProviderFor(userFireStoreDataSource)
+final userFireStoreDataSourceProvider =
+    AutoDisposeProvider<UserFireStoreDataSource>.internal(
+  userFireStoreDataSource,
+  name: r'userFireStoreDataSourceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$authenticationHash,
+      : _$userFireStoreDataSourceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$Authentication = Notifier<AuthState>;
+typedef UserFireStoreDataSourceRef
+    = AutoDisposeProviderRef<UserFireStoreDataSource>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
