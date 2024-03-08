@@ -21,6 +21,18 @@ class UserFireStoreDataSourceImpl implements UserFireStoreDataSource {
   Future<void> remove(String id) async {
     return await collection.doc(id).delete();
   }
+
+  @override
+  Stream<List<UserModel>> getAll() async* {
+    final userStream = collection.snapshots();
+
+    await for (final users in userStream) {
+      yield [
+        for (final user in users.docs) user.data(),
+      ];
+    }
+  }
+
 }
 
 @riverpod

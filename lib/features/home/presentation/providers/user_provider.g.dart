@@ -6,7 +6,22 @@ part of 'user_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userHash() => r'514a7d5c4a4e872397d9776390781ffcb74f539c';
+String _$getAllusersHash() => r'83de7d85aa4e0df16e95879af52897a4adaf8f22';
+
+/// See also [getAllusers].
+@ProviderFor(getAllusers)
+final getAllusersProvider =
+    AutoDisposeStreamProvider<List<UserEntity>>.internal(
+  getAllusers,
+  name: r'getAllusersProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$getAllusersHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetAllusersRef = AutoDisposeStreamProviderRef<List<UserEntity>>;
+String _$userHash() => r'c1a52ed6783b9c7655b0aa93d90bbd61c23c72cb';
 
 /// See also [User].
 @ProviderFor(User)

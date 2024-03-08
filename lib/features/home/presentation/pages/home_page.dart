@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:user_app/features/authentication/presentation/providers/auth_provider.dart';
+import 'package:user_app/features/home/presentation/providers/user_provider.dart';
 import 'package:user_app/features/home/presentation/widgets/show_dialog_widget.dart';
+import 'package:user_app/features/home/presentation/widgets/user_widget.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -26,13 +28,19 @@ class HomePage extends ConsumerWidget {
         ],
       ),
       backgroundColor: Colors.black,
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [],
-        ),
-      ),
+      body: switch (ref.watch(getAllusersProvider)) {
+        AsyncData(:final value) => SizedBox(
+            child: UserWidget(entity: value),
+          ),
+        AsyncError() => const Center(
+            child: Text('Error while getting data'),
+          ),
+        _ => const Center(
+            child: CircularProgressIndicator(),
+          )
+      },
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey,
         onPressed: () {
           showDialog(
             context: context,

@@ -23,6 +23,22 @@ class UserRepositoryImpl implements UserRepository {
   Future<void> deleteUser(String id) async {
     await dataSource.remove(id);
   }
+
+  @override
+  Stream<List<UserEntity>> getAll() async* {
+    final data = dataSource.getAll();
+    await for (final snapshot in data) {
+      final docs = snapshot;
+      yield [
+        for (final user in docs)
+          UserEntity(
+            name: user.name,
+            age: user.age,
+            id: user.id,
+          )
+      ];
+    }
+  }
 }
 
 @riverpod
