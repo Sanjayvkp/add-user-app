@@ -6,8 +6,7 @@ import 'package:user_app/features/authentication/data/repository/auth_repository
 import 'package:user_app/features/authentication/domain/repository/auth_repository.dart';
 import 'package:user_app/features/authentication/domain/usecases/login_with_phone_usecase.dart';
 import 'package:user_app/features/authentication/domain/usecases/verify_otp_usecase.dart';
-import 'package:user_app/features/authentication/presentation/pages/home_page.dart';
-import 'package:user_app/features/authentication/presentation/pages/login_page.dart';
+import 'package:user_app/features/home/presentation/pages/home_page.dart';
 import 'package:user_app/features/authentication/presentation/pages/otp_verification_page.dart';
 import 'package:user_app/features/authentication/presentation/providers/auth_state.dart';
 
