@@ -17,9 +17,6 @@ part 'auth_provider.g.dart';
 @Riverpod(keepAlive: true)
 class Authentication extends _$Authentication {
   late final AuthenticationRepository repository;
-  final TextEditingController phonenumberlogincontroller =
-      TextEditingController();
-  final TextEditingController otpcontroller = TextEditingController();
 
   @override
   AuthState build() {
@@ -33,7 +30,7 @@ class Authentication extends _$Authentication {
       state = AuthState(
           verificationId: verificationData.$1,
           resendToken: verificationData.$2);
-      Future.sync(() => Navigator.pushReplacement(
+      Future.sync(() => Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => const OtpVerificationPage(),
@@ -48,11 +45,13 @@ class Authentication extends _$Authentication {
       await VerifyOtpUsecase(
               repository: ref.read(authenticationRepositoryProvider))(
           state.verificationId, otp);
-      Future.sync(() => Navigator.pushReplacement(
+      Future.sync(
+        () => Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          )));
+          MaterialPageRoute(builder: (context) => const HomePage()),
+          (route) => false,
+        ),
+      );
     } on BaseException catch (e) {
       Future.sync(() => SnackbarUtils.showMessage(context, e.message));
     }

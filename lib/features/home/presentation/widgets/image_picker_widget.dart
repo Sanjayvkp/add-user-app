@@ -37,26 +37,20 @@ class ImagePickerWidget extends ConsumerWidget {
         ref.read(imageProvider.notifier).state = imageSelected;
       },
       child: Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
-        ),
-        child: imageToShow ??
-            const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: CircleAvatar(
-                    child: Icon(Icons.person),
-                  ),
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: imageToShow ??
+                const Icon(
+                  Icons.add_a_photo_rounded,
+                  color: Colors.white,
                 ),
-                SizedBox(
-                  height: 8,
-                ),
-              ],
-            ),
-      ),
+          )),
     );
   }
 }

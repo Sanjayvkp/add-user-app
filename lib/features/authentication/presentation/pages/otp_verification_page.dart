@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:user_app/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:user_app/features/authentication/presentation/widgets/login_button_widget.dart';
 import 'package:user_app/features/authentication/presentation/widgets/textfield_widget.dart';
 
-class OtpVerificationPage extends ConsumerWidget {
+class OtpVerificationPage extends HookConsumerWidget {
   const OtpVerificationPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.read(authenticationProvider.notifier);
+    final otpController = useTextEditingController();
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -35,8 +38,7 @@ class OtpVerificationPage extends ConsumerWidget {
                     keyboardtype: TextInputType.number,
                     hintText: 'Enter Otp',
                     icondata: const Icon(Icons.lock_clock_rounded),
-                    controller:
-                        ref.read(authenticationProvider.notifier).otpcontroller,
+                    controller: otpController,
                   ),
                   const SizedBox(
                     height: 32,
@@ -44,12 +46,7 @@ class OtpVerificationPage extends ConsumerWidget {
                   LoginButtonWidget(
                     btntxt: 'Confirm Otp',
                     onPressed: () {
-                      ref.read(authenticationProvider.notifier).verifyOtp(
-                          context,
-                          ref
-                              .read(authenticationProvider.notifier)
-                              .otpcontroller
-                              .text);
+                      data.verifyOtp(context, otpController.text);
                     },
                   ),
                   const SizedBox(

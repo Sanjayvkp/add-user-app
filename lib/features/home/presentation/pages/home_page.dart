@@ -19,8 +19,34 @@ class HomePage extends ConsumerWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () =>
-                  ref.read(authenticationProvider.notifier).signOut(context),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: const Text(
+                        'Are you sure want to logout ?',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                      actionsAlignment: MainAxisAlignment.center,
+                      actions: [
+                        TextButton(
+                            onPressed: () => ref
+                                .read(authenticationProvider.notifier)
+                                .signOut(context),
+                            child: const Text('Yes')),
+                        TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('No')),
+                      ],
+                    );
+                  },
+                );
+              },
               icon: const Icon(
                 Icons.logout,
                 color: Colors.white,

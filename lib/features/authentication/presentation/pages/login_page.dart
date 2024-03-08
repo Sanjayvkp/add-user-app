@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:user_app/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:user_app/features/authentication/presentation/widgets/login_button_widget.dart';
-import 'package:user_app/features/authentication/presentation/widgets/textfield_widget.dart';
 
-class LogInPage extends ConsumerWidget {
+class LogInPage extends HookConsumerWidget {
   const LogInPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final data = ref.read(authenticationProvider.notifier);
+    final phonenumberController = useTextEditingController();
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -33,13 +37,22 @@ class LogInPage extends ConsumerWidget {
               const SizedBox(
                 height: 40,
               ),
-              TextfieldWidget(
-                hintText: 'Phone number',
-                icondata: const Icon(Icons.phone),
-                controller: ref
-                    .read(authenticationProvider.notifier)
-                    .phonenumberlogincontroller,
-                keyboardtype: TextInputType.number,
+              IntlPhoneField(
+                flagsButtonPadding: const EdgeInsets.all(8),
+                dropdownIconPosition: IconPosition.trailing,
+                showCountryFlag: false,
+                decoration: const InputDecoration(
+                  fillColor: Colors.grey,
+                  filled: true,
+                  hintText: 'Phone number',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(),
+                  ),
+                ),
+                initialCountryCode: 'IN',
+                onChanged: (phone) {
+                  phonenumberController.text = phone.completeNumber;
+                },
               ),
               const SizedBox(
                 height: 32,
@@ -47,12 +60,7 @@ class LogInPage extends ConsumerWidget {
               LoginButtonWidget(
                 btntxt: 'Send OTP',
                 onPressed: () {
-                  ref.read(authenticationProvider.notifier).signInWithPhone(
-                      context,
-                      ref
-                          .read(authenticationProvider.notifier)
-                          .phonenumberlogincontroller
-                          .text);
+                  data.signInWithPhone(context, phonenumberController.text);
                 },
               )
             ],
