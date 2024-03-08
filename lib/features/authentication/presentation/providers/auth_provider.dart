@@ -33,7 +33,7 @@ class Authentication extends _$Authentication {
       state = AuthState(
           verificationId: verificationData.$1,
           resendToken: verificationData.$2);
-      Future.sync(() => Navigator.push(
+      Future.sync(() => Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => const OtpVerificationPage(),
