@@ -23,6 +23,7 @@ mixin _$UserModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get age => throw _privateConstructorUsedError;
+  String get imagePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
-  $Res call({String id, String name, String age});
+  $Res call({String id, String name, String age, String imagePath});
 }
 
 /// @nodoc
@@ -54,6 +55,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? id = null,
     Object? name = null,
     Object? age = null,
+    Object? imagePath = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -68,6 +70,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as String,
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -80,7 +86,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
       __$$UserModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String age});
+  $Res call({String id, String name, String age, String imagePath});
 }
 
 /// @nodoc
@@ -97,6 +103,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? age = null,
+    Object? imagePath = null,
   }) {
     return _then(_$UserModelImpl(
       id: null == id
@@ -111,6 +118,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as String,
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -118,7 +129,11 @@ class __$$UserModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserModelImpl extends _UserModel {
-  _$UserModelImpl({required this.id, required this.name, required this.age})
+  _$UserModelImpl(
+      {required this.id,
+      required this.name,
+      required this.age,
+      required this.imagePath})
       : super._();
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -130,10 +145,12 @@ class _$UserModelImpl extends _UserModel {
   final String name;
   @override
   final String age;
+  @override
+  final String imagePath;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, age: $age)';
+    return 'UserModel(id: $id, name: $name, age: $age, imagePath: $imagePath)';
   }
 
   @override
@@ -143,12 +160,14 @@ class _$UserModelImpl extends _UserModel {
             other is _$UserModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.age, age) || other.age == age));
+            (identical(other.age, age) || other.age == age) &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, age);
+  int get hashCode => Object.hash(runtimeType, id, name, age, imagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +187,8 @@ abstract class _UserModel extends UserModel {
   factory _UserModel(
       {required final String id,
       required final String name,
-      required final String age}) = _$UserModelImpl;
+      required final String age,
+      required final String imagePath}) = _$UserModelImpl;
   _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -180,6 +200,8 @@ abstract class _UserModel extends UserModel {
   String get name;
   @override
   String get age;
+  @override
+  String get imagePath;
   @override
   @JsonKey(ignore: true)
   _$$UserModelImplCopyWith<_$UserModelImpl> get copyWith =>

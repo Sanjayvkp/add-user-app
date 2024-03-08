@@ -8,5 +8,6 @@ class UserEntity with _$UserEntity {
     required String name,
     required String age,
     required String id,
+     required String imagePath,
   }) = _UserEntity;
 }

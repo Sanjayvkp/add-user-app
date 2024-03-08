@@ -19,6 +19,7 @@ mixin _$UserEntity {
   String get name => throw _privateConstructorUsedError;
   String get age => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  String get imagePath => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserEntityCopyWith<UserEntity> get copyWith =>
@@ -31,7 +32,7 @@ abstract class $UserEntityCopyWith<$Res> {
           UserEntity value, $Res Function(UserEntity) then) =
       _$UserEntityCopyWithImpl<$Res, UserEntity>;
   @useResult
-  $Res call({String name, String age, String id});
+  $Res call({String name, String age, String id, String imagePath});
 }
 
 /// @nodoc
@@ -50,6 +51,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? name = null,
     Object? age = null,
     Object? id = null,
+    Object? imagePath = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -64,6 +66,10 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -76,7 +82,7 @@ abstract class _$$UserEntityImplCopyWith<$Res>
       __$$UserEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String age, String id});
+  $Res call({String name, String age, String id, String imagePath});
 }
 
 /// @nodoc
@@ -93,6 +99,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? name = null,
     Object? age = null,
     Object? id = null,
+    Object? imagePath = null,
   }) {
     return _then(_$UserEntityImpl(
       name: null == name
@@ -107,6 +114,10 @@ class __$$UserEntityImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -114,7 +125,11 @@ class __$$UserEntityImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserEntityImpl implements _UserEntity {
-  _$UserEntityImpl({required this.name, required this.age, required this.id});
+  _$UserEntityImpl(
+      {required this.name,
+      required this.age,
+      required this.id,
+      required this.imagePath});
 
   @override
   final String name;
@@ -122,10 +137,12 @@ class _$UserEntityImpl implements _UserEntity {
   final String age;
   @override
   final String id;
+  @override
+  final String imagePath;
 
   @override
   String toString() {
-    return 'UserEntity(name: $name, age: $age, id: $id)';
+    return 'UserEntity(name: $name, age: $age, id: $id, imagePath: $imagePath)';
   }
 
   @override
@@ -135,11 +152,13 @@ class _$UserEntityImpl implements _UserEntity {
             other is _$UserEntityImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.age, age) || other.age == age) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, age, id);
+  int get hashCode => Object.hash(runtimeType, name, age, id, imagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -152,7 +171,8 @@ abstract class _UserEntity implements UserEntity {
   factory _UserEntity(
       {required final String name,
       required final String age,
-      required final String id}) = _$UserEntityImpl;
+      required final String id,
+      required final String imagePath}) = _$UserEntityImpl;
 
   @override
   String get name;
@@ -160,6 +180,8 @@ abstract class _UserEntity implements UserEntity {
   String get age;
   @override
   String get id;
+  @override
+  String get imagePath;
   @override
   @JsonKey(ignore: true)
   _$$UserEntityImplCopyWith<_$UserEntityImpl> get copyWith =>

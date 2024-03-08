@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:user_app/features/home/data/repository/user_repository_impl.dart';
@@ -23,13 +22,11 @@ class User extends _$User {
     required String name,
     required String age,
     required String id,
+    required String imagePath,
   }) {
     repository = ref.read(userRepositoryProvider);
     return AddUserUseCase(repository: repository)(
-      age: age,
-      name: name,
-      id: id,
-    );
+        age: age, name: name, id: id, imagePath: imagePath);
   }
 
   Future<void> deleteUser(String id) {
@@ -40,7 +37,6 @@ class User extends _$User {
 
 @riverpod
 Stream<List<UserEntity>> getAllusers(GetAllusersRef ref) {
-
   final repository = ref.read(userRepositoryProvider);
   return GetUserUseCase(repository: repository)();
 }

@@ -19,8 +19,8 @@ class UserWidget extends ConsumerWidget {
           child: Card(
             color: const Color.fromARGB(255, 23, 23, 23),
             child: ListTile(
-              leading: const CircleAvatar(
-                child: Icon(Icons.person_2_outlined),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(entity[index].imagePath),
               ),
               title: Text(
                 entity[index].name,

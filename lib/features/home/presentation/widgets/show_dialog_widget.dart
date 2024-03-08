@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:user_app/features/home/presentation/providers/user_provider.dart';
+import 'package:user_app/features/home/presentation/widgets/image_picker_widget.dart';
 
 class ShowDialogWidget extends ConsumerWidget {
   const ShowDialogWidget({super.key});
@@ -13,6 +14,7 @@ class ShowDialogWidget extends ConsumerWidget {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            const ImagePickerWidget(),
             TextField(
               controller: data.nameController,
               decoration: const InputDecoration(hintText: 'Username'),
@@ -27,6 +29,7 @@ class ShowDialogWidget extends ConsumerWidget {
             ElevatedButton(
                 onPressed: () {
                   ref.read(userProvider.notifier).addUser(
+                      imagePath: ref.watch(imageProvider)!.path,
                       name: data.nameController.text,
                       age: data.ageController.text,
                       id: '');
