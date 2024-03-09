@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:user_app/features/home/data/datasources/user_firestore_datasource.dart';
 import 'package:user_app/features/home/data/datasources/user_firestore_datasource_impl.dart';
@@ -14,8 +15,10 @@ part 'user_repository_impl.g.dart';
 class UserRepositoryImpl implements UserRepository {
   final UserFireStoreDataSource dataSource;
   final UserStorageDataSource storageDataSource;
-  UserRepositoryImpl(
-      {required this.dataSource, required this.storageDataSource});
+  UserRepositoryImpl({
+    required this.dataSource,
+    required this.storageDataSource,
+  });
   @override
   Future<void> addUser(UserEntity entity, String id) async {
     await dataSource.add(UserModel(
@@ -32,8 +35,9 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Stream<List<UserEntity>> getAll() async* {
-    final data = dataSource.getAll();
+  Stream<List<UserEntity>> getAll(
+      {int limit = 10, DocumentSnapshot? startAfter}) async* {
+    final data = dataSource.getAll(limit: limit, startAfter: startAfter);
     await for (final snapshot in data) {
       final docs = snapshot;
       yield [

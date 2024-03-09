@@ -10,7 +10,10 @@ class UserWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ScrollController scrollController = ScrollController();
+
     return ListView.builder(
+      controller: scrollController,
       itemCount: entity.length,
       shrinkWrap: true,
       physics: const ClampingScrollPhysics(),
@@ -39,11 +42,13 @@ class UserWidget extends ConsumerWidget {
                       context: context,
                       builder: (context) {
                         return AlertDialogWidget(
-                          title: 'Are you Sure want to delete this user?',
-                          onPressed: () => ref
-                              .read(userProvider.notifier)
-                              .deleteUser(entity[index].id),
-                        );
+                            title: 'Are you Sure want to delete this user?',
+                            onPressed: () {
+                              ref
+                                  .read(userProvider.notifier)
+                                  .deleteUser(entity[index].id);
+                              Navigator.pop(context);
+                            });
                       },
                     );
                   },
@@ -58,7 +63,3 @@ class UserWidget extends ConsumerWidget {
     );
   }
 }
-
-  // ref
-  //                       .read(userProvider.notifier)
-  //                       .deleteUser(entity[index].id);

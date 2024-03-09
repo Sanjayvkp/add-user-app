@@ -24,13 +24,13 @@ class LogInPage extends HookConsumerWidget {
             children: [
               const Icon(
                 Icons.supervisor_account_outlined,
-                color: Color.fromARGB(255, 214, 14, 0),
+                color: Colors.amber,
                 size: 65,
               ),
               const Text(
                 'Login Now',
                 style: TextStyle(
-                    color: Color.fromARGB(255, 214, 14, 0),
+                    color: Colors.amber,
                     fontWeight: FontWeight.w600,
                     fontSize: 18),
               ),

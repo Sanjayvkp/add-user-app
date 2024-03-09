@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:user_app/core/exceptions/base_exception.dart';
 import 'package:user_app/core/utils/firebase_storage_utils.dart';
 import 'package:user_app/features/home/domain/entities/user_entity.dart';
@@ -8,9 +9,11 @@ final class GetUserUseCase {
 
   GetUserUseCase({required this.repository});
 
-  Stream<List<UserEntity>> call() async* {
+  Stream<List<UserEntity>> call(
+      {int limit = 10, DocumentSnapshot? startAfter}) async* {
     try {
-      final userStream = repository.getAll();
+      final userStream =
+          repository.getAll(limit: limit, startAfter: startAfter);
       await for (final users in userStream) {
         yield [
           for (final user in users)
