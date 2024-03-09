@@ -23,14 +23,7 @@ class UserFireStoreDataSourceImpl implements UserFireStoreDataSource {
   }
 
   @override
-  Stream<List<UserModel>> getAll(
-      {int limit = 10, DocumentSnapshot? startAfter}) async* {
-    Query query = collection.orderBy('name').limit(limit);
-
-    if (startAfter != null) {
-      query = query.startAfterDocument(startAfter);
-    }
-
+  Stream<List<UserModel>> getAll() async* {
     final userStream = collection.snapshots();
 
     await for (final users in userStream) {

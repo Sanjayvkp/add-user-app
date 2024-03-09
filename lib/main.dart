@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:user_app/features/home/presentation/pages/home_page.dart';
 import 'package:user_app/features/authentication/presentation/pages/login_page.dart';
+
 import 'package:user_app/firebase_options.dart';
 
 Future<void> main() async {

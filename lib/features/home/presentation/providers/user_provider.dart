@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:user_app/features/home/data/repository/user_repository_impl.dart';
 import 'package:user_app/features/home/domain/entities/user_entity.dart';
@@ -37,15 +35,5 @@ class User extends _$User {
 @riverpod
 Stream<List<UserEntity>> getAllusers(GetAllusersRef ref) {
   final repository = ref.read(userRepositoryProvider);
-
-  final limit = ref.read(limitProvider);
-  final startAfter = ref.read(startAfterProvider);
-
-  return GetUserUseCase(repository: repository)(
-    limit: limit,
-    startAfter: startAfter,
-  );
+  return GetUserUseCase(repository: repository)();
 }
-
-final limitProvider = StateProvider<int>((ref) => 10); // Initial limit
-final startAfterProvider = StateProvider<DocumentSnapshot?>((ref) => null);
