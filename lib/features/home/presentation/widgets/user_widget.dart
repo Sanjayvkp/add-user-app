@@ -10,15 +10,6 @@ class UserWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final ScrollController scrollController = useScrollController();
-
-    // useEffect(() {
-    //   final listener =
-    //   scrollController.addListener(() { })
-
-    //   return null;
-    // }, []);
-
     final isLoading =
         ref.watch(userProvider.select((value) => value.isLoading));
 

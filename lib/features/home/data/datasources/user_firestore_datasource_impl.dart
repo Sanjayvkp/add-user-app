@@ -30,7 +30,8 @@ class UserFireStoreDataSourceImpl implements UserFireStoreDataSource {
       query = query.startAfterDocument(await collection.doc(lastDoc).get());
     }
 
-    final userStream = query.limit(limit).snapshots();
+    final userStream =
+        query.limit(limit).snapshots(includeMetadataChanges: true);
 
     await for (final users in userStream) {
       yield [
