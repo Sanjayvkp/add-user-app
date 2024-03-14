@@ -40,17 +40,19 @@ class HomePage extends ConsumerWidget {
         ],
       ),
       backgroundColor: Colors.black,
-      body: switch (ref.watch(getAllusersProvider)) {
-        AsyncData(:final value) => SizedBox(
-            child: UserWidget(entity: value),
-          ),
-        AsyncError() => const Center(
-            child: Text('Error while getting data'),
-          ),
-        _ => const Center(
+      body: Consumer(builder: (context, ref, child) {
+        final users = ref.watch(userProvider);
+
+        if (users.users == null) {
+          return const Center(
             child: CircularProgressIndicator(),
-          )
-      },
+          );
+        } else {
+          return SizedBox(
+            child: UserWidget(entity: users.users!),
+          );
+        }
+      }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey,
         onPressed: () {

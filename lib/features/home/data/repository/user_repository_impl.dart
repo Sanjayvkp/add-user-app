@@ -33,8 +33,8 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Stream<List<UserEntity>> getAll() async* {
-    final data = dataSource.getAll();
+  Stream<List<UserEntity>> getAll(int limit, String lastDoc) async* {
+    final data = dataSource.getAll(limit, lastDoc);
     await for (final snapshot in data) {
       final docs = snapshot;
       yield [

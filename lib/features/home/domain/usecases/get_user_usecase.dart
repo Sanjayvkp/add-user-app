@@ -8,9 +8,9 @@ final class GetUserUseCase {
 
   GetUserUseCase({required this.repository});
 
-  Stream<List<UserEntity>> call() async* {
+  Stream<List<UserEntity>> call(int limit, String lastDoc) async* {
     try {
-      final userStream = repository.getAll();
+      final userStream = repository.getAll(limit, lastDoc);
       await for (final users in userStream) {
         yield [
           for (final user in users)
